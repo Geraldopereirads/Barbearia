@@ -2,3 +2,5 @@ npm install prisma --save-dev
 npx prisma init --datasource-provider postgresql
 npx prisma format
 npx prisma migrate dev --name add-initial_tables
+npm install -D ts-node
+npx prisma db seed
