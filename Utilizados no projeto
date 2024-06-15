@@ -5,3 +5,4 @@ npx prisma migrate dev --name add-initial_tables
 npm install -D ts-node
 npx prisma db seed
 npx shadcn-ui@latest init
+npm install date-fns
