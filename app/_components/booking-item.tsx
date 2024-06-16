@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 
-export const BookingItem = () => {
+const BookingItem = () => {
   return (
     <Card>
       <CardContent className="p-5 flex justify-between py-0">
@@ -31,3 +31,5 @@ export const BookingItem = () => {
     </Card>
   );
 };
+
+export default BookingItem
