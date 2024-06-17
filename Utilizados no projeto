@@ -6,3 +6,5 @@ npm install -D ts-node
 npx prisma db seed
 npx shadcn-ui@latest init
 npm install date-fns
+npm install next-auth
+npm install @auth/prisma-adapter
