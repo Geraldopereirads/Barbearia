@@ -3,9 +3,15 @@
 import { Button } from "@/app/_components/ui/button";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { ServiceItemProps } from "@/app/interfaces/barbershop-interface";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 
-const ServiceItem = ({ services }: ServiceItemProps) => {
+const ServiceItem = ({ services, isAuthenticated }: ServiceItemProps) => {
+  const handleBookingClick = () => {
+    if(!isAuthenticated){
+      return signIn("google")
+    }
+  }
   return (
     <div>
       <Card>
@@ -31,7 +37,7 @@ const ServiceItem = ({ services }: ServiceItemProps) => {
                     currency: "BRL",
                   }).format(Number(services.price))}
                 </p>
-                <Button className="w-20" variant="secondary">Reservar</Button>
+                <Button className="w-20" variant="secondary" onClick={handleBookingClick}>Reservar</Button>
               </div>
             </div>
           </div>

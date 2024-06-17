@@ -16,4 +16,5 @@ export interface BarbershopInfoProps {
 
 export interface ServiceItemProps {
     services: Service
+    isAuthenticated?: boolean;
 }
