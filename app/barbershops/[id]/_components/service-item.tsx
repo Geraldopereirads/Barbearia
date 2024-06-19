@@ -19,6 +19,7 @@ import React, { useMemo, useState } from "react";
 import { generateDayTimeList } from "../_helpers/hours";
 import { format } from "date-fns";
 
+
 const ServiceItem = ({
   services,
   barbershop,
@@ -40,6 +41,7 @@ const ServiceItem = ({
     if (!isAuthenticated) {
       return signIn("google");
     }
+    
   };
 
   const timeList = useMemo(() => {
@@ -172,9 +174,10 @@ const ServiceItem = ({
                     </div>
 
                     <SheetFooter className="px-5">
-                      <Button disabled={!hour || !date}>Confirmar reserva</Button>
+                      <Button disabled={!hour || !date}>
+                        Confirmar reserva
+                      </Button>
                     </SheetFooter>
-                    
                   </SheetContent>
                 </Sheet>
               </div>

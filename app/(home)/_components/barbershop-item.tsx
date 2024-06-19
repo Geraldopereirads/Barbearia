@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 
 export const BarbeshopItem = ({ barbershop }: BarbershopItemProps) => {
   const router = useRouter();
+
   const handleBookingClick = () => {
     router.push(`/barbershops/${barbershop.id}`);
   };
@@ -56,4 +57,3 @@ export const BarbeshopItem = ({ barbershop }: BarbershopItemProps) => {
     </Card>
   );
 };
-
