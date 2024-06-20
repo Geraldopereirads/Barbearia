@@ -13,20 +13,23 @@ import {
 } from "@/app/_components/ui/sheet";
 import { ServiceItemProps } from "@/app/interfaces/barbershop-interface";
 import { ptBR } from "date-fns/locale";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { generateDayTimeList } from "../_helpers/hours";
-import { format } from "date-fns";
-
+import { format, setHours, setMinutes } from "date-fns";
+import { saveBooking } from "../_actions/save-booking";
+import { Loader2 } from "lucide-react";
 
 const ServiceItem = ({
   services,
   barbershop,
   isAuthenticated,
 }: ServiceItemProps) => {
+  const { data } = useSession();
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [hour, setHour] = useState<string | undefined>();
+  const [submitIsloading, setSubmitIsLoading] = useState(false);
 
   const handleDateClick = (date: Date | undefined) => {
     setDate(date);
@@ -41,12 +44,36 @@ const ServiceItem = ({
     if (!isAuthenticated) {
       return signIn("google");
     }
-    
+  };
+
+  const handleBookingSubmit = async () => {
+    setSubmitIsLoading(true);
+    try {
+      if (!hour || !date || !data?.user) {
+        return;
+      }
+
+      const dateHour = Number(hour.split(":")[0]);
+      const dateMinutes = Number(hour.split(":")[1]);
+      const newDate = setMinutes(setHours(date, dateHour), dateMinutes);
+
+      await saveBooking({
+        serviceId: services.id,
+        barbershopId: barbershop.id,
+        date: newDate,
+        userId: (data.user as any).id,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitIsLoading(false);
+    }
   };
 
   const timeList = useMemo(() => {
     return date ? generateDayTimeList(date) : [];
   }, [date]);
+
   return (
     <div>
       <Card>
@@ -137,7 +164,7 @@ const ServiceItem = ({
                     <div className="py-6 px-5 border-t border-solid border-secondary">
                       <Card>
                         <CardContent className="p-3 flex flex-col gap-3">
-                          <div className="flex justify-between">
+                          <div className="flex justify-between gap-11">
                             <h2 className="font-bold">{services.name}</h2>
 
                             <h3 className="font-bold text-sm">
@@ -165,7 +192,7 @@ const ServiceItem = ({
                             </div>
                           )}
 
-                          <div className="flex justify-between">
+                          <div className="flex justify-between gap-11">
                             <h3 className="text-gray-400 text-sm">Barbearia</h3>
                             <h4 className="text-sm">{barbershop.name}</h4>
                           </div>
@@ -174,7 +201,13 @@ const ServiceItem = ({
                     </div>
 
                     <SheetFooter className="px-5">
-                      <Button disabled={!hour || !date}>
+                      <Button
+                        onClick={handleBookingSubmit}
+                        disabled={!hour || !date || submitIsloading}
+                      >
+                        {submitIsloading && (
+                          <Loader2 className="mr-2 h-4 w-4 anima" />
+                        )}
                         Confirmar reserva
                       </Button>
                     </SheetFooter>
