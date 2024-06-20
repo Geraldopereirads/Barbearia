@@ -21,6 +21,7 @@ import { format, setHours, setMinutes } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const ServiceItem = ({
   services,
@@ -32,6 +33,7 @@ const ServiceItem = ({
   const [hour, setHour] = useState<string | undefined>();
   const [submitIsloading, setSubmitIsLoading] = useState(false);
   const [sheetIsOpen, setSheetIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleDateClick = (date: Date | undefined) => {
     setDate(date);
@@ -67,13 +69,15 @@ const ServiceItem = ({
       });
 
       setSheetIsOpen(false);
+      setHour(undefined);
+      setDate(undefined);
       toast("Reserva realizada com sucesso!", {
         description: format(newDate, "'para' dd 'de' MMMM 'as' HH':'mm'.'", {
           locale: ptBR,
         }),
         action: {
           label: "visualizar",
-          onClick: () => console.log("Undo"),
+          onClick: () => router.push("/bookings"),
         },
       });
     } catch (error) {
