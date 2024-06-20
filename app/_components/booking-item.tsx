@@ -8,7 +8,7 @@ import { ptBR } from "date-fns/locale";
 const BookingItem = ({booking}: BookingItemProps) => {
   const isBookingCondirmed = isFuture(booking.date)
   return (
-    <Card>
+    <Card className="min-w-full">
       <CardContent className="px-0 flex py-0">
         <div className="flex flex-col gap-2 py-5 flex-[3] pl-5">
           <Badge variant={
