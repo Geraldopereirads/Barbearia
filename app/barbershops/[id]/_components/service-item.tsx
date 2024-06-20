@@ -20,6 +20,7 @@ import { generateDayTimeList } from "../_helpers/hours";
 import { format, setHours, setMinutes } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const ServiceItem = ({
   services,
@@ -30,6 +31,7 @@ const ServiceItem = ({
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [hour, setHour] = useState<string | undefined>();
   const [submitIsloading, setSubmitIsLoading] = useState(false);
+  const [sheetIsOpen, setSheetIsOpen] = useState(false);
 
   const handleDateClick = (date: Date | undefined) => {
     setDate(date);
@@ -62,6 +64,17 @@ const ServiceItem = ({
         barbershopId: barbershop.id,
         date: newDate,
         userId: (data.user as any).id,
+      });
+
+      setSheetIsOpen(false);
+      toast("Reserva realizada com sucesso!", {
+        description: format(newDate, "'para' dd 'de' MMMM 'as' HH':'mm'.'", {
+          locale: ptBR,
+        }),
+        action: {
+          label: "visualizar",
+          onClick: () => console.log("Undo"),
+        },
       });
     } catch (error) {
       console.log(error);
@@ -99,7 +112,7 @@ const ServiceItem = ({
                     currency: "BRL",
                   }).format(Number(services.price))}
                 </p>
-                <Sheet>
+                <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
                   <SheetTrigger asChild>
                     <Button
                       className="w-20"
