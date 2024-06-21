@@ -6,7 +6,7 @@ import { db } from "../_lib/prisma";
 import { BarbeshopItem } from "./_components/barbershop-item";
 import Search from "./_components/search";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../_lib/auth";
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
