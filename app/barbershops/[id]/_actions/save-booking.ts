@@ -2,6 +2,7 @@
 
 import { db } from "@/app/_lib/prisma";
 import { SaveBookingParams } from "@/app/interfaces/barbershop-interface";
+import { revalidatePath } from "next/cache";
 
 export const saveBooking = async (params: SaveBookingParams) => {
   await db.booking.create({
@@ -12,4 +13,6 @@ export const saveBooking = async (params: SaveBookingParams) => {
       barbershopId: params.barbershopId,
     },
   });
+  revalidatePath("/");
+  revalidatePath("/bookings");
 };
