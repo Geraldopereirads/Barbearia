@@ -34,7 +34,11 @@ const Home = async () => {
       <Header />
 
       <div className="px-5 pt-5">
-        <h2 className="text-xl font-bold">{session?.user ? `Olá, ${session.user.name?.split(" ")[0]}` : "Olá Vamos agendar um corte hoje?"}</h2>
+        <h2 className="text-xl font-bold">
+          {session?.user
+            ? `Olá, ${session.user.name?.split(" ")[0]}`
+            : "Olá Vamos agendar um corte hoje?"}
+        </h2>
         <p className="capitalize text-sm">
           {format(new Date(), "EEEE',' dd 'de' MMMM", {
             locale: ptBR,
@@ -68,7 +72,9 @@ const Home = async () => {
 
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((barbershop) => (
-            <BarbeshopItem key={barbershop.id} barbershop={barbershop} />
+            <div key={barbershop.id} className="min-w-[167px] max-w-[167px]">
+              <BarbeshopItem barbershop={barbershop} />
+            </div>
           ))}
         </div>
       </div>

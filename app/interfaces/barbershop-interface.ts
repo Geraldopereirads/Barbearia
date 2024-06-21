@@ -1,4 +1,6 @@
 import { Barbershop, Booking, Prisma, Service } from "@prisma/client";
+import { formSchema } from "../(home)/_components/search";
+import { z } from "zod";
 
 export interface BarbershopItemProps {
   barbershop: Barbershop;
@@ -38,4 +40,15 @@ export interface BookingItemProps {
       barbershop: true
     };
   }>;
+}
+
+
+export interface BarbershopsPageProps {
+  searchParams: {
+    search?: string
+  }
+}
+
+export interface SearchProps {
+  defaultValues?: z.infer<typeof formSchema>;
 }
