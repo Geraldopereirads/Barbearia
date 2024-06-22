@@ -16,7 +16,7 @@ export const BarbeshopItem = ({ barbershop }: BarbershopItemProps) => {
   };
   return (
     <Card className="min-w-full max-w-full rounded-2xl">
-      <CardContent className="px-1 py-0">
+      <CardContent className="px-1 py-0 pt-1">
         <div className="px-1 w-full h-[159px] relative">
           <div className="absolute top-2 left-2 z-50">
             <Badge
@@ -30,7 +30,7 @@ export const BarbeshopItem = ({ barbershop }: BarbershopItemProps) => {
           <Image
             className="rounded-2xl"
             src={barbershop.imageUrl}
-            alt="Barbearias"
+            alt={barbershop.name}
             style={{
               objectFit: "cover",
             }}
