@@ -15,9 +15,10 @@ export const BarbeshopItem = ({ barbershop }: BarbershopItemProps) => {
     router.push(`/barbershops/${barbershop.id}`);
   };
   return (
-    <Card className="w-full max-w-[167px] rounded-2xl">
+    <Card
+      className="w-full max-w-[200px] rounded-2xl lg:7"
+    >
       <CardContent className="px-1 py-0 pt-1">
-        
         <div className="px-1 w-full min-w h-[159px] relative">
           <div className="absolute top-2 left-2 z-50">
             <Badge
