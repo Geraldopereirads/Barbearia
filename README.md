@@ -22,4 +22,3 @@ Este é um projeto Full Stack desenvolvido utilizando NextJS e TypeScript, com o
 - **Prisma**
 - **Node.js**
 
-Este projeto é uma aplicação completa, proporcionando uma experiência de usuário fluida e intuitiva. Se você procura um exemplo prático de como integrar diversas tecnologias modernas em um só projeto, este é o repositório ideal!
