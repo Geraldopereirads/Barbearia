@@ -49,15 +49,24 @@ git clone https://github.com/Geraldopereirads/Barbearia.git
 
 Lista com algumas funcionalidades implementadas no projeto:
 
-🪒 Cadastro de serviços prestados
+ Login utilizando o Google
 
-📅 Agendamento de horários
+ Cadastro de serviços prestados
 
-📋 Listagem de agendamentos
+ Agendamento de horários
 
-👤 Cadastro/visualização de clientes
+ Listagem de agendamentos
 
-👨‍💻 Autor
+ Busca por uma Barbearia
+
+ Barbearias Recomendadas
+
+ Barbearias Populares
+
+ Cadastro/visualização de clientes
+
+
+ Autor
 
 Geraldo Pereira dos Santos
 
